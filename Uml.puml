@@ -1,0 +1,515 @@
+@startuml
+class com.mygdx.game.Screens.Settings.CreateSettingsScreen {
+- Main game
+- Slider volumeSlider
+- Button exitButton
+- GDXDialogs dManager
++ Button createExitButton()
+- void showExitDialog()
++ Button createBackButton()
++ Slider createVolumeSlider()
++ ImageButton createVolumeImageButton(ImageButton.ImageButtonStyle)
+}
+
+
+class com.mygdx.game.Screens.Leaderboard.LeaderboardPlayer {
+- String userId
+- String username
+- int coins
+- int meters
++ String getUserId()
++ void setUserId(String)
++ String getUsername()
++ void setUsername(String)
++ int getCoins()
++ int getMeters()
+}
+
+
+class com.mygdx.game.Utils.DataBaseAdapter {
++ {static} String databaseUrl
+- {static} FirebaseDatabase database
++ {static} Main game
++ {static} void updateUserCoins(int)
++ {static} void updateUserMeters(int)
++ {static} void updateUserSkins(Map<String,Boolean>)
+}
+
+
+class com.mygdx.game.Utils.MyBroadcastReceiver {
++ void onReceive(Context,Intent)
+}
+
+class com.mygdx.game.Screens.Main.MainScreen {
++ SpriteBatch batch
+- Stage stage
+- Button playButton
+- Button settingsButton
+- Main game
+- Image characterImage
+- Animation<TextureRegion> characterAnimation
+- float stateTime
+- Texture backgroundImage
++ void show()
++ void render(float)
++ void resize(int,int)
++ void pause()
++ void resume()
++ void hide()
++ void dispose()
++ {static} BitmapFont createCustomFont(int)
+}
+
+
+class com.mygdx.game.Screens.Settings.SettingsScreen {
+- Stage stage
+- Main game
+- Button backButton
+- Slider volumeSlider
+- ImageButton.ImageButtonStyle volumeStyle
+- Preferences prefs
++ void show()
++ void render(float)
++ void resize(int,int)
++ void pause()
++ void resume()
++ void hide()
++ void dispose()
+}
+
+
+enum com.mygdx.game.Screens.Leaderboard.LeaderboardMode {
++  COINS
++  METERS
+}
+
+class com.mygdx.game.Sprites.Bird {
+- Vector2 velocity
+- Animation<TextureRegion> flyingAnimation
+- float stateTime
++ void draw(Batch)
+- void update(float)
+}
+
+
+class com.mygdx.game.Sprites.Skin {
+- String name
+- Image image
+- Integer cost
++ String getName()
++ void setName(String)
++ Image getImage()
++ void setImage(Image)
++ Integer getCost()
++ void setCost(Integer)
+}
+
+
+class com.mygdx.game.Start {
+# void onCreate(Bundle)
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+- void showExitDialog()
+- void showInformationDialog()
+}
+
+class com.mygdx.game.Screens.Leaderboard.LeaderboardScreen {
+- Main game
+- List<LeaderboardPlayer> leaderboardList
+- Stage stage
+- Label userLabel
+- Label pointsLabel
+- LeaderboardMode leaderboardMode
+- TextButton coinsButton
+- TextButton metersButton
+- TextButton.TextButtonStyle boldButtonStyle
+- TextButton.TextButtonStyle normalButtonStyle
++ void show()
++ void render(float)
++ void resize(int,int)
+- void fetchUserDataFromFirebase()
+- TextButton createCoinsButton()
+- TextButton createMetersButton()
+- Label createUserLabel()
+- Label createPointsLabel()
+- Button createBackButton()
++ {static} BitmapFont createCustomFont(int)
+- TextButton.TextButtonStyle createButtonStyle(boolean)
+- void updateButtonStyles()
++ void pause()
++ void resume()
++ void hide()
++ void dispose()
+}
+
+
+class com.mygdx.game.Screens.SignUp.SignUpScreen {
+- Main game
+- Stage stage
++ {static} Toast toast
++ void show()
++ void render(float)
++ void resize(int,int)
++ void pause()
++ void resume()
++ void hide()
++ void dispose()
+}
+
+
+class com.mygdx.game.Screens.Play.PlayScreen {
+- Main game
+- TiledMap map
+- OrthogonalTiledMapRenderer renderer
+- OrthographicCamera camera
+- Player player
+- MapAdapter mapAdapter
+- float transitionTime
+- float timeLeft
+- BitmapFont font
+- Music backgroundMusic
+- Music collectCoinsMusic
+- ArrayList<Coin> coins
+- TiledMapTileLayer groundLayer
+- ArrayList<Bird> birds
+- ImageButton forwardButton
+- ImageButton backwardButton
+- ImageButton jumpButton
+- ImageButton pauseButton
+- Stage stage
+- boolean pauseDialogIsShown
+~ int playerMeters
+~ int playerCoins
++ void show()
++ void render(float)
+- void update()
+- void updateCamera()
++ void resize(int,int)
++ void pause()
++ void resume()
++ void hide()
++ void dispose()
+- void setTransition(float)
+- void drawPlayerInfo()
+- void playBackgroundMusic()
+- void drawCoinsAndBirds()
+- ArrayList<Coin> generateCoins()
+- ArrayList<Bird> generateBirds()
+- void checkCollisions()
+- void checkCollisionWithCoins()
+- void checkCollisionWithBirds()
++ void checkCollisionWithSpikes()
+- boolean isOnAir(int,int)
+- ImageButton createButton(String,float,float)
+- void showPauseDialog()
+- void handlePlayerDeath()
+}
+
+
+class com.mygdx.game.Account {
+- {static} String id
+- {static} String name
+- {static} int coins
+- {static} int meters
+- {static} Map<String,Boolean> skins
+- {static} String currentSkin
++ {static} String getId()
++ {static} void setId(String)
++ {static} String getName()
++ {static} void setName(String)
++ {static} int getCoins()
++ {static} void increaseCoins()
++ {static} void addCoins(int)
++ {static} void removeCoins(int)
++ {static} void setCoins(int)
++ {static} int getMeters()
++ {static} void setMeters(int)
++ {static} Map<String,Boolean> getSkins()
++ {static} void setSkins(Map<String,Boolean>)
++ {static} boolean hasSkin(String)
++ {static} String getCurrentSkin()
++ {static} void setCurrentSkin(String)
+}
+
+
+class com.mygdx.game.Utils.MapAdapter {
+- {static} TiledMap tiledMap
+- int tileWidth
+- int tileHeight
++ int getMapWidthInTiles()
++ int getMapHeightInTiles()
++ int getTileWidthInPixels()
++ int getTileHeightInPixels()
++ int getMapWidthInPixels()
++ int getMapHeightInPixels()
++ int getGroundTileValue(int,int)
++ int getSpikesTileValue(int,int)
++ int getTileWidth()
++ int getTileHeight()
+}
+
+
+class com.mygdx.game.Screens.SignUp.CreateSignUpScreen {
+- Main game
+- TextField usernameField
+- Label usernameUnavailableLabel
+- Label creatingUserLabel
++ TextField createUsernameField()
++ TextButton createSubmitButton()
++ Label createCreatingUserLabel()
++ Label createUsernameUnavailableLabel()
++ {static} BitmapFont createCustomFont(int)
++ Texture createColoredSquareTexture(int,Color)
++ boolean isUsernameGood(String)
+}
+
+
+class com.mygdx.game.Screens.Splash.SplashScreen {
+- Animation<TextureRegion> splashAnimation
+- float stateTime
+- Main game
+- boolean isLoadedUserData
+- Image characterImage
+- Stage stage
++ void updateAccountData()
++ void show()
++ void render(float)
++ void resize(int,int)
++ void pause()
++ void resume()
++ void hide()
++ void dispose()
+}
+
+
+class com.mygdx.game.Screens.ChangeSkin.ChangeSkinScreen {
+- Main game
+- Stage stage
++ void show()
++ void render(float)
++ void resize(int,int)
++ void pause()
++ void resume()
++ void hide()
++ void dispose()
+}
+
+
+class com.mygdx.game.Main {
++ Viewport screenPort
++ float volume
++ int WIDTH
++ int HEIGHT
+- boolean accountCreated
+- Preferences prefs
++ void create()
++ void render()
++ void dispose()
++ float getVolume()
++ void setVolume(float)
++ Preferences getPrefs()
++ boolean isAccountCreated()
++ void setAccountCreated(boolean)
++ Toast.ToastFactory createToastFactory(Color,Color,float)
++ {static} Texture getCurrentIdleTexture()
++ {static} Texture getCurrentRunTexture()
++ {static} Texture getBirdTexture()
+}
+
+
+class com.mygdx.game.Utils.Toast {
+- String msg
+- BitmapFont font
+- float fadingDuration
+- Color fontColor
+- SpriteBatch spriteBatch
+- ShapeRenderer renderer
+- float opacity
+- int toastWidth
+- int toastHeight
+- float timeToLive
+- float positionX
+- float fontX
+- int fontWidth
++ boolean render(float)
+}
+
+
+enum com.mygdx.game.Utils.Length {
++  SHORT
++  LONG
+- float duration
+}
+
+class com.mygdx.game.Utils.Toast$ToastFactory {
+- BitmapFont font
+- Color backgroundColor
+- Color fontColor
+- float positionY
+- float fadingDuration
+- float maxRelativeWidth
+- Integer customMargin
++ Toast create(String,Length)
+}
+
+
+class com.mygdx.game.Utils.Toast$ToastFactory$Builder {
+- boolean built
+- ToastFactory factory
++ Builder font(BitmapFont)
++ Builder backgroundColor(Color)
++ Builder fontColor(Color)
++ Builder positionY(float)
++ Builder fadingDuration(float)
++ Builder maxTextRelativeWidth(float)
++ Builder margin(int)
++ ToastFactory build()
+- void check()
+}
+
+
+class com.mygdx.game.Sprites.Player {
+- State currentState
+- Vector2 velocity
+- float speed
+- float gravity
+- float jumpDuration
+- TiledMapTileLayer groundLayer
+- MapAdapter mapAdapter
+- int tileWidth
+- int tileHeight
+- boolean jumping
+- boolean canJump
+- float jumpTimer
+- boolean transitionComplete
+- Animation<TextureRegion> standAnimation
+- Animation<TextureRegion> walkAnimation
+- float stateTime
++ void draw(Batch)
++ void jump()
+- float calculateJumpVelocity()
+- void isJumping(float)
+- void applyGravity()
++ void update(float)
++ int collidesTop(float,float)
++ int collidesRight(float,float)
++ int collidesBottom(float,float)
++ int getTileX()
++ int getTileY()
++ void transitionToRunningState()
++ Vector2 getVelocity()
++ void setVelocity(Vector2)
++ float getSpeed()
++ void setSpeed(float)
++ float getGravity()
++ void setGravity(float)
++ TiledMapTileLayer getGroundLayer()
++ void setGroundLayer(TiledMapTileLayer)
++ boolean isCanJump()
++ void setCanJump(boolean)
++ boolean isJumping()
++ State getCurrentState()
++ void setCurrentState(State)
++ float getTransitionTime()
++ boolean isTransitionComplete()
++ void setDied()
++ boolean isDead()
+}
+
+
+enum com.mygdx.game.Sprites.State {
++  STANDING
++  RUNNING
++  DEAD
+}
+
+class com.mygdx.game.Screens.ChangeSkin.CreateChangeSkinScreen {
+- Main game
+- Skin mort
+- Skin doux
+- Skin vita
+- Skin tard
+- Image mortImage
+- Integer mortX
+- Image douxImage
+- Integer douxX
+- Image vitaImage
+- Integer vitaX
+- Image tardImage
+- Integer tardX
+- GDXDialogs dManager
+- Music purchaseMusic
++ Label createMortLabel()
++ Image createMortImage()
++ Label createDouxLabel()
++ Image createDouxImage()
++ Label createDouxCostLabel()
++ Label createVitaLabel()
++ Image createVitaImage()
++ Label createVitaCostLabel()
++ Label createTardLabel()
++ Image createTardImage()
++ Label createTardCostLabel()
++ Button createBackButton()
+- void updateUserSkins(String)
+- void changeSkinAndReturn(String)
++ {static} BitmapFont createCustomFont(int)
+- void showPurchaseDialog(Skin)
+}
+
+
+class com.mygdx.game.Sprites.Coin {
+- boolean isBeenTaken
++ void draw(Batch)
++ boolean isBeenTaken()
++ void setBeenTaken()
+}
+
+
+class com.mygdx.game.Screens.Main.CreateMainScreen {
+- Main game
+- Button playButton
+- Button settingsButton
+- Button leaderboardButton
+- Label coinsLabel
+- Image greenBackground
++ Button createPlayButton()
++ Label createPlayLabel()
++ Image createGreenBackgroundImage(Image)
++ Label createChangeSkinLabel()
++ Button createSettingsButton()
++ Label createPlayerNameLabel()
++ Button createCoinsButton()
++ Label createCoinsLabel()
++ Button createLeaderboardButton()
++ {static} BitmapFont createCustomFont(int)
++ Texture createColoredSquareTexture(int,Color)
+}
+
+
+class com.mygdx.game.AndroidLauncher {
+- MyBroadcastReceiver myBroadcastReceiver
+# void onCreate(Bundle)
+# void onDestroy()
+}
+
+
+
+
+android.content.BroadcastReceiver <|-- com.mygdx.game.Utils.MyBroadcastReceiver
+com.badlogic.gdx.Screen <|.. com.mygdx.game.Screens.Main.MainScreen
+com.badlogic.gdx.Screen <|.. com.mygdx.game.Screens.Settings.SettingsScreen
+com.badlogic.gdx.graphics.g2d.Sprite <|-- com.mygdx.game.Sprites.Bird
+androidx.appcompat.app.AppCompatActivity <|-- com.mygdx.game.Start
+com.badlogic.gdx.Screen <|.. com.mygdx.game.Screens.Leaderboard.LeaderboardScreen
+com.badlogic.gdx.Screen <|.. com.mygdx.game.Screens.SignUp.SignUpScreen
+com.badlogic.gdx.Screen <|.. com.mygdx.game.Screens.Play.PlayScreen
+com.badlogic.gdx.Screen <|.. com.mygdx.game.Screens.Splash.SplashScreen
+com.badlogic.gdx.Screen <|.. com.mygdx.game.Screens.ChangeSkin.ChangeSkinScreen
+com.badlogic.gdx.Game <|-- com.mygdx.game.Main
+com.mygdx.game.Utils.Toast +.. com.mygdx.game.Utils.Toast$ToastFactory
+com.mygdx.game.Utils.Toast$ToastFactory +.. com.mygdx.game.Utils.Toast$ToastFactory$Builder
+com.badlogic.gdx.graphics.g2d.Sprite <|-- com.mygdx.game.Sprites.Player
+com.badlogic.gdx.graphics.g2d.Sprite <|-- com.mygdx.game.Sprites.Coin
+com.badlogic.gdx.backends.android.AndroidApplication <|-- com.mygdx.game.AndroidLauncher
+@enduml
