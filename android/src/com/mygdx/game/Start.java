@@ -1,9 +1,11 @@
 package com.mygdx.game;
 
 import android.app.AlertDialog;
+import android.app.Service;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,6 +27,7 @@ import com.mygdx.game.Utils.AndroidLauncher;
 
 public class Start extends AppCompatActivity {
 
+    private MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,11 @@ public class Start extends AppCompatActivity {
             Intent intent = new Intent(this, AndroidLauncher.class);
             startActivity(intent);
         });
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.start_background);
+        mediaPlayer.setLooping(true);
+        if(!mediaPlayer.isPlaying())
+            mediaPlayer.start();
     }
 
     @Override
@@ -129,5 +137,12 @@ public class Start extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release(); // Release the media player resources
+            mediaPlayer = null;
+        }
+    }
 }

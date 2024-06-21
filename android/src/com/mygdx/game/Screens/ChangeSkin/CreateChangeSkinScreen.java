@@ -176,9 +176,6 @@ public class CreateChangeSkinScreen {
                 if(!Account.hasSkin("vita")){
                     if(Account.getCoins() >= vita.getCost()){
                         showPurchaseDialog(vita);
-
-
-
                     }
                 }
                 else{
