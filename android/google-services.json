@@ -1,1 +1,30 @@
-
+{
+  "project_info": {
+    "project_number": "157382531374",
+    "firebase_url": "https://game-c25ee-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "game-c25ee",
+    "storage_bucket": "game-c25ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157382531374:android:7844d149cdec02d40d42bf",
+        "android_client_info": {
+          "package_name": "com.mygdx.game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKqKWux5CVXxYGBUtmnh7ObDGWhl6p67E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

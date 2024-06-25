@@ -140,6 +140,7 @@ public class Player extends Sprite {
         setY(getY() + velocity.y * delta);
 
         if (getY() < 0) {
+            hearts = 0;
             setDied();
         }
     }

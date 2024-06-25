@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import android.app.AlertDialog;
-import android.app.Service;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -62,6 +61,7 @@ public class Start extends AppCompatActivity {
 
         Button playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(v -> {
+            mediaPlayer.stop();
             Intent intent = new Intent(this, AndroidLauncher.class);
             startActivity(intent);
         });
@@ -141,7 +141,8 @@ public class Start extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (mediaPlayer != null) {
-            mediaPlayer.release(); // Release the media player resources
+            mediaPlayer.stop();
+            mediaPlayer.release();
             mediaPlayer = null;
         }
     }
